@@ -1,0 +1,17 @@
+{% extends 'writer/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block contents%}
+
+<div class='container shadow-md w-50 p-5 form-layout'>
+    <h2>Write an Article</h2>
+    <br>
+    <form method = 'POST', autocomplete = 'off'>
+        {% csrf_token %}
+        {{ form | crispy}}
+        <br>
+        <input class='btn btn-success' type = 'submit', value = 'Sunmit'>
+    </form>
+</div>
+{% endblock %}

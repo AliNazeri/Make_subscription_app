@@ -1,0 +1,19 @@
+{% extends 'client/base.html' %}
+{% load static %}
+
+{% block contents%}
+
+<div class='container shadow-md w-50 p-5 form-layout'>
+    <h2>Delete Your Account</h2>
+    <strong>Careful you are Deleting your account!!</strong>
+    <br>
+    <form method = 'POST', autocomplete = 'off'>
+        {% csrf_token %}
+        <br>
+        <input class='btn btn-danger' type = 'submit', value = 'Delete Account'>
+    </form>
+    <hr>
+    <a class = 'btn btn-primary' href="{% url 'client-profile' %}">Cancel</a>
+</div>
+
+{% endblock %}

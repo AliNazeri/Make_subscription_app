@@ -1,0 +1,27 @@
+{% extends 'client/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block contents%}
+{% if object_list == None %}
+        <div class='container shadow-md w-50 p-5 form-layout'>
+                <p>You need to subscribe in order to read articles</p>
+        </div>
+{% else %}
+        {% for article in object_list %}
+                <div class='container shadow-md w-50 p-5 form-layout'>  
+                        <h3> {{ article.title | title}}</h3>
+                        <p>- {{ article.publish_date|date }}</p>
+                        {% if article.is_premium %}
+                                <p>Premium</p>
+                        {% else %}
+                                <p>Standard</p>
+                        {% endif %}
+                        <hr>
+                        <div>{{article.text | capfirst}}</div>
+
+                </div>
+        {% endfor %}
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'client/base.html' %}
+{% load static %}
+
+{% block contents%}
+
+<div class = "container shadow-md p-5 form-layout text-center">
+    <h2>Your subscription has been successfully Updated!!</h2>
+    <hr>
+    <h4>Continue Reading</h4>
+    <br>
+    <a class = 'btn btn-primary' href="{% url 'client-read-articles' %}">Let Read Articles</a>
+</div>
+
+{% endblock %}

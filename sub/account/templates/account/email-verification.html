@@ -1,0 +1,9 @@
+
+{% autoescape off %}
+
+    Hello
+
+    Please verify your gmail by clicking on link below:
+    http://{{domain}}{% url 'email-verification' uidb64=uid token=token %}
+
+{% endautoescape %}

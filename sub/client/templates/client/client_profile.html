@@ -1,0 +1,22 @@
+{% extends 'client/base.html' %}
+{% load static %}
+
+{% block contents%}
+
+<div class = "container shadow-md p-5 form-layout text-center">
+    <h2>Welcome, {{name}}</h2>
+    
+</div>
+
+<div class = "container shadow-md p-5 form-layout text-center">
+    <h3>Your Current Subscription</h2>
+        {% if subscription == 'P' %}
+            <p>Premium</p>
+        {% elif subscription == 'S' %}
+            <p>Standard</p>
+        {% else %}
+            <p>You don't have a Subscription</p>
+        {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'writer/base.html' %}
+{% load static %}
+
+{% block contents%}
+
+<div class='container shadow-md w-50 p-5 form-layout'>
+    <h2>Delete Your Article</h2>
+    <br>
+    <form method = 'POST', autocomplete = 'off'>
+        {% csrf_token %}
+        <br>
+        <input class='btn btn-danger' type = 'submit', value = 'Delete'>
+    </form>
+    <hr>
+    <a class = 'btn btn-primary'href="{% url 'read-articles' %}">Return to articles</a>
+</div>
+{% endblock %}

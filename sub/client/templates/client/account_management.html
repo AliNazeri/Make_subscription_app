@@ -1,0 +1,105 @@
+{% extends 'client/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block contents%}
+
+    <div class='container shadow-md w-50 p-5 form-layout'>
+        <h2>Edit your account's details</h2>
+        <br>
+        <form method = 'POST', autocomplete = 'off'>
+            {% csrf_token %}
+            {{ form | crispy}}
+            <br>
+            <input class='btn btn-primary' type = 'submit' name = 'edit-profile' value = 'Update Profile'>
+        </form>
+        <br>
+        <a class = 'btn btn-warning' href="{% url 'client-delete-account' %}">Delete Account</a>
+    </div>
+
+
+{% if subscribed %}
+    <div class='container shadow-md w-50 p-5 form-layout'>
+        <h2>Cancel your subscription</h2>
+        <strong>You are canceling your current subscription.</strong>
+        <br>
+        <form method = 'POST', action="{% url 'account_management' %}">
+            {% csrf_token %}
+            <br>
+            <input class='btn btn-danger' type = 'submit' name = 'cancel-sub' value = 'Cancel Subscription'>
+        </form>
+        <hr>
+    </div>
+
+    <div class='container shadow-md w-50 p-5 form-layout'>
+        <h2>Update your subscription</h2>
+        <strong>You can downgrade and upgrade you subscription here.</strong>
+        <br><br>
+        <a class="btn btn-info" type="button"  href="{% url 'update-subscription' %}">Update</a>
+        <hr>
+    </div>
+{% else %}
+
+    <div class='container shadow-md w-50 p-5 form-layout'>
+        <h2>You dont have a Subscription yet!</h2>
+        <div class = "row">
+            <h2 class = "text-center mt-5">Subscription Plans</h2>
+                <div class = "container shadow-md p-5 w-50 text-center">
+                    <h3>Standard</h2>
+                    <p>Access only to Standard articles</p>
+                    <div id="paypal-button-container-P-18Y42395BS1678219MZVPWJY"></div>
+                        <script src="https://www.paypal.com/sdk/js?client-id=AWcE_gQoagOh1erG9VvooTwTjrDvZ_tMsK6Y9Ye_xyO1PKm1YKPNtmjLhl2RsAHuLgUpE4Co2hpss0xo&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+                        <script>
+                        paypal.Buttons({
+                            style: {
+                                shape: 'rect',
+                                color: 'silver',
+                                layout: 'vertical',
+                                label: 'subscribe'
+                            },
+                            createSubscription: function(data, actions) {
+                                return actions.subscription.create({
+                                /* Creates the subscription */
+                                plan_id: 'P-18Y42395BS1678219MZVPWJY'
+                                });
+                            },
+                            onApprove: function(data, actions) {
+                                var next_url = '/client/subscription/' + data.subscriptionID + '/Standard/'
+                                window.open(next_url, '_self')
+                            }
+                        }).render('#paypal-button-container-P-18Y42395BS1678219MZVPWJY'); // Renders the PayPal button
+                        </script>
+                </div>
+                <div class = "container shadow-md p-5 w-50 text-center">
+                    <h3>Premium</h2>
+                    <p>Access to All articles</p>
+            
+                    <div id="paypal-button-container-P-42N33026M62007619MZVPW2Y"></div>
+                    
+                    <script>
+                      paypal.Buttons({
+                          style: {
+                              shape: 'rect',
+                              color: 'gold',
+                              layout: 'vertical',
+                              label: 'subscribe'
+                          },
+                          createSubscription: function(data, actions) {
+                            return actions.subscription.create({
+                              /* Creates the subscription */
+                              plan_id: 'P-42N33026M62007619MZVPW2Y'
+                            });
+                          },
+                          onApprove: function(data, actions) {
+                            var next_url = '/client/subscription/' + data.subscriptionID + '/Premium/'
+                            window.open(next_url, '_self')
+                          }
+                      }).render('#paypal-button-container-P-42N33026M62007619MZVPW2Y'); // Renders the PayPal button
+                    </script>
+                    
+                </div>
+            </div>
+    </div>
+
+{% endif %}
+
+{% endblock %}

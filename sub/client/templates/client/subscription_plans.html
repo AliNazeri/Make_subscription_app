@@ -1,0 +1,64 @@
+{% extends 'client/base.html' %}
+{% load static %}
+
+{% block contents%}
+
+<div class = "row">
+<h2 class = "text-center mt-5">Subscription Plans</h2>
+    <div class = "container shadow-md p-5 w-50 text-center">
+        <h3>Standard</h2>
+        <p>Access only to Standard articles</p>
+        <div id="paypal-button-container-"></div>
+            <script src="https://www.paypal.com/sdk/js?client-id=" data-sdk-integration-source="button-factory"></script>
+            <script>
+            paypal.Buttons({
+                style: {
+                    shape: 'rect',
+                    color: 'silver',
+                    layout: 'vertical',
+                    label: 'subscribe'
+                },
+                createSubscription: function(data, actions) {
+                    return actions.subscription.create({
+                    /* Creates the subscription */
+                    plan_id: ''
+                    });
+                },
+                onApprove: function(data, actions) {
+                    var next_url = '/client/subscription/' + data.subscriptionID + '/Standard/'
+                    window.open(next_url, '_self')
+                }
+            }).render('#paypal-button-container-'); // Renders the PayPal button
+            </script>
+    </div>
+    <div class = "container shadow-md p-5 w-50 text-center">
+        <h3>Premium</h2>
+        <p>Access to All articles</p>
+
+        <div id="paypal-button-container-"></div>
+        
+        <script>
+          paypal.Buttons({
+              style: {
+                  shape: 'rect',
+                  color: 'gold',
+                  layout: 'vertical',
+                  label: 'subscribe'
+              },
+              createSubscription: function(data, actions) {
+                return actions.subscription.create({
+                  /* Creates the subscription */
+                  plan_id: ''
+                });
+              },
+              onApprove: function(data, actions) {
+                var next_url = '/client/subscription/' + data.subscriptionID + '/Premium/'
+                window.open(next_url, '_self')
+              }
+          }).render('#paypal-button-container-'); // Renders the PayPal button
+        </script>
+        
+    </div>
+</div>
+
+{% endblock %}

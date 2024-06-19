@@ -1,0 +1,35 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE Html>
+<html lang="en">
+    <head>
+        <title> Edenthought </title>
+
+
+          <meta charset="utf-8" />
+
+          <meta name="viewport" content="width-device-width, initial-scale=1, maximum-scale=1"/>
+
+
+          <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/cyborg/bootstrap.min.css">
+
+
+          <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    </head>
+    <body>
+        <br>
+        <div class="container shadow-md w-25 p-5 form-layout">
+            <h2>Login</h2>
+            <br>
+            {{message.as_p}}
+            <form method = 'POST', autocomplete = 'off'>
+                {% csrf_token %}
+                {{ form | crispy}}
+                <br>
+                <input class='btn btn-success' type = 'submit', value = 'Login'>
+            </form>
+        </div>
+        <br>
+    </body>
+</html>

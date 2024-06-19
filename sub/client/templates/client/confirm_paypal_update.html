@@ -1,0 +1,28 @@
+{% extends 'client/base.html' %}
+{% load static %}
+
+{% block contents%}
+{% if paypal_accepted%}
+    <div class = "container shadow-md p-5 form-layout text-center">
+        <h2>Confirm your action</h2>
+
+        <p>Confirm here for Updating Your Subscription</p>
+        <form method = 'POST', action="{% url 'update-subscription' %}">
+            {% csrf_token %}
+            <br>
+            <input class='btn btn-success' type = 'submit', value = 'Confirm'>
+        </form>
+        <a class = 'btn btn-primary' href="{% url 'client-read-articles' %}">Cancel</a>
+    </div>
+{% else %}
+
+<div class = "container shadow-md p-5 form-layout text-center">
+    <h2>Failed to obtain Paypal approval</h2>
+
+    <p>Failed to catch approval link from paypal</p>
+    <a class = 'btn btn-primary' href="{% url 'client-read-articles' %}">Let Read Articles</a>
+</div>
+
+{% endif %}
+
+{% endblock %}

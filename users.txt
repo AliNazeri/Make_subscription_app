@@ -1,0 +1,12 @@
+superusers
+
+admin2@gmail.com
+admin
+
+super@gmail.com
+super
+
+
+users
+test2@gmail.com
+letmetest
